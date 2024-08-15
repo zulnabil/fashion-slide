@@ -14,27 +14,15 @@ export class ProductService extends CacheService {
   private client: AxiosInstance | null = null;
   private isValidBaseUrl: boolean = true;
 
-  constructor(baseUrl: string = "/api", cacheDuration: number = 5 * 60 * 1000) {
+  constructor(baseURL: string = "/api", cacheDuration: number = 5 * 60 * 1000) {
     super(cacheDuration);
 
-    if (this.validateUrl(baseUrl)) {
-      this.client = axios.create({
-        baseURL: baseUrl,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } else {
-      console.error(`Invalid base URL provided: ${baseUrl}`);
-      this.isValidBaseUrl = false;
-    }
-  }
-
-  private validateUrl(url: string): boolean {
-    // Simple regex to validate the URL (not foolproof but works for most cases)
-    const urlPattern =
-      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
-    return urlPattern.test(url);
+    this.client = axios.create({
+      baseURL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   private getCacheKey(method: string, url: string): string {
