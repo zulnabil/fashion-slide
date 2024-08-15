@@ -1,7 +1,5 @@
-// Colours
-$primary: #0071ff;
-$secondary: #16abff;
-$background: #f8f9fa;
+@import 'variables';
+@import 'mixins';
 
 :root {
   --primary: $primary;
@@ -17,12 +15,24 @@ $background: #f8f9fa;
 
 html,
 body {
+  background: lightgray;
   max-width: 100vw;
   overflow-x: hidden;
-  padding: 5rem;
+}
+
+main {
+  background: white;
+  min-height: 100vh;
+  max-width: 500px;
+  margin: auto;
+
+  // use stack
+  @include stack();
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
+
+

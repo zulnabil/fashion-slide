@@ -1,0 +1,6 @@
+@mixin stack( $gap: 1rem, $direction: column) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+    gap: $gap;
+  }

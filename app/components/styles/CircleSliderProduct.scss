@@ -1,22 +1,22 @@
-$slider-height: 30rem;
-$half-slider-height: $slider-height / 2;
-
-.circle-slider-container {
-  width: $slider-height;
-  height: $slider-height;
-  position: relative;
-  padding: 2rem 0;
-}
+@import 'variables';
 
 .circle-slider {
-  border-radius: 50%;
   display: flex;
+  padding: 0 1rem;
   gap: 0.5rem;
   align-items: center;
+  height: 80px;
   width: 100%;
-  height: 100%;
-  position: absolute;
   transition: all 0.5s;
+  overflow: auto;
+  scroll-behavior: smooth;
+
+  // Hide scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &__image {
     border-radius: 50%;
@@ -24,14 +24,17 @@ $half-slider-height: $slider-height / 2;
   }
 
   &__item {
-    flex: 0 0 auto;
-    position: absolute;
-    left: 0;
-
     cursor: pointer;
     transition: all 0.5s;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
 
     &--active {
+      box-shadow: 0 0 0 2px $secondary;
+      border-radius: 50%;
+      transform: scale(1.25);
+      margin: 0 0.5rem;
       transition: all 0.5s;
     }
   }
