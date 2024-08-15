@@ -1,9 +1,23 @@
-import CircleSliderProduct from "../components/CircleSliderProduct";
-import { ProductService } from "~/app/services/product";
-import { BASE_API_URL } from "~/app/constants/config";
+"use client";
 
-export default async function ListProduct() {
-  const productService = new ProductService(BASE_API_URL);
-  const { data } = await productService.getProducts();
-  return <CircleSliderProduct products={data} />;
+import CircleSliderProduct from "../components/CircleSliderProduct";
+import { useProduct } from "~/app/contexts/ProductContext";
+
+export default function ListProduct() {
+  const {
+    state: { products, activeProductId },
+    dispatch,
+  } = useProduct();
+
+  function handleChangeActiveId(id: string) {
+    dispatch({ type: "SET_ACTIVE_PRODUCT", payload: id });
+  }
+
+  return (
+    <CircleSliderProduct
+      products={products}
+      activeId={activeProductId}
+      onChangeActiveId={handleChangeActiveId}
+    />
+  );
 }

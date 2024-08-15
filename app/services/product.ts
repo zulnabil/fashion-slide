@@ -27,7 +27,7 @@ export class ProductService extends CacheService {
     return `${method}:${url}`;
   }
 
-  private async request<T>({ method, url, useCache }: RequestParams) {
+  private async request<T>({ method, url, useCache = true }: RequestParams) {
     const cacheKey = this.getCacheKey(method, url);
     const shouldUseCache = useCache && method === "GET";
 

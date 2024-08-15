@@ -3,39 +3,40 @@
 import Image from "next/image";
 import "./styles/CircleSliderProduct.scss";
 import { FashionItem } from "~/app/types/feature";
-import { useState, useRef } from "react";
 
 interface CircleSliderProductProps {
   products: FashionItem[];
+  activeId: string;
+  onChangeActiveId: (id: string) => void;
 }
 
 export default function CircleSliderProduct({
   products,
+  activeId,
+  onChangeActiveId,
 }: CircleSliderProductProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const handleClickProduct =
-    (index: number) => (event: React.MouseEvent<HTMLDivElement>) => {
+    (index: string) => (event: React.MouseEvent<HTMLDivElement>) => {
       event.currentTarget.scrollIntoView({
         behavior: "smooth",
         block: "center",
         inline: "center",
       });
 
-      setActiveIndex(index);
+      onChangeActiveId(index);
     };
 
   return (
     <div className="circle-slider">
-      {products.map((product, index) => {
-        const isActive = activeIndex === index;
+      {products.map((product) => {
+        const isActive = activeId === product.id;
         return (
           <div
-            key={`${product.id}-${index}`}
+            key={product.id}
             className={`circle-slider__item${
               isActive ? " circle-slider__item--active" : ""
             }`}
-            onClick={handleClickProduct(index)}
+            onClick={handleClickProduct(product.id)}
           >
             <Image
               width="60"
