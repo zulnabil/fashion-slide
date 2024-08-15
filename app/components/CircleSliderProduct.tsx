@@ -28,8 +28,9 @@ export default function CircleSliderProduct({
 
   return (
     <div className="circle-slider">
-      {products.map((product) => {
+      {products.map((product, index) => {
         const isActive = activeId === product.id;
+        const isPriority = index <= 5;
         return (
           <div
             key={product.id}
@@ -44,6 +45,7 @@ export default function CircleSliderProduct({
               src={product.images[0].url}
               alt={product.title}
               className="circle-slider__image"
+              priority={isPriority}
             />
           </div>
         );

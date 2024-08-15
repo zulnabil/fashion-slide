@@ -13,7 +13,6 @@ export default function useGetProductById(
     if (!id) return;
 
     productService.getProductById(id).then(({ data }) => {
-      console.debug("call getProductById", id);
       setData(data);
     });
   }, [id]);

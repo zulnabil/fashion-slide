@@ -63,7 +63,7 @@ export function ProductProvider({
 }: ProductProviderProps) {
   const [state, dispatch] = useReducer(productReducer, {
     products: [],
-    activeProductId: "",
+    activeProductId: "1",
     ...initialValue,
   });
 

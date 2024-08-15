@@ -2,7 +2,7 @@ import { FashionCategory, FashionItem } from "~/app/types/feature";
 
 export const products: FashionItem[] = [
   {
-    id: "fashion-001",
+    id: "1",
     title: "Summer Breeze Sundress",
     description: "Light and airy sundress perfect for warm days",
     category: FashionCategory.Dresses,
@@ -22,8 +22,8 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-002",
-    title: "Classic Leather Jacket",
+    id: "2",
+    title: "Blue Jeans Denim",
     description: "Timeless leather jacket for a cool, edgy look",
     category: FashionCategory.Outerwear,
     store: {
@@ -50,7 +50,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-003",
+    id: "3",
     title: "Silk Scarf Collection",
     description: "Elegant silk scarves in various patterns",
     category: FashionCategory.Accessories,
@@ -74,7 +74,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-004",
+    id: "4",
     title: "Athletic Performance Sneakers",
     description: "High-performance sneakers for serious athletes",
     category: FashionCategory.Footwear,
@@ -102,7 +102,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-005",
+    id: "5",
     title: "Vintage Inspired Sunglasses",
     description: "Retro-style sunglasses with modern UV protection",
     category: FashionCategory.Eyewear,
@@ -130,7 +130,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-006",
+    id: "6",
     title: "Designer Handbag",
     description: "Luxury leather handbag with signature design",
     category: FashionCategory.Bags,
@@ -158,7 +158,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-007",
+    id: "7",
     title: "Smart Casual Blazer",
     description: "Versatile blazer for both office and casual wear",
     category: FashionCategory.Jackets,
@@ -178,7 +178,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-008",
+    id: "8",
     title: "Bohemian Maxi Skirt",
     description: "Flowing maxi skirt with vibrant patterns",
     category: FashionCategory.Skirts,
@@ -202,7 +202,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-009",
+    id: "9",
     title: "Luxury Wristwatch",
     description: "Precision-crafted timepiece with elegant design",
     category: FashionCategory.Accessories,
@@ -230,7 +230,7 @@ export const products: FashionItem[] = [
     ],
   },
   {
-    id: "fashion-010",
+    id: "10",
     title: "Eco-friendly Yoga Set",
     description:
       "Sustainable yoga top and leggings made from recycled materials",
