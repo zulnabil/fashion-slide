@@ -11,23 +11,46 @@ interface RequestParams {
 }
 
 export class ProductService extends CacheService {
-  private client: AxiosInstance;
+  private client: AxiosInstance | null = null;
+  private isValidBaseUrl: boolean = true;
 
   constructor(baseUrl: string = "/api", cacheDuration: number = 5 * 60 * 1000) {
     super(cacheDuration);
-    this.client = axios.create({
-      baseURL: baseUrl,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+
+    if (this.validateUrl(baseUrl)) {
+      this.client = axios.create({
+        baseURL: baseUrl,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else {
+      console.error(`Invalid base URL provided: ${baseUrl}`);
+      this.isValidBaseUrl = false;
+    }
+  }
+
+  private validateUrl(url: string): boolean {
+    // Simple regex to validate the URL (not foolproof but works for most cases)
+    const urlPattern =
+      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+    return urlPattern.test(url);
   }
 
   private getCacheKey(method: string, url: string): string {
     return `${method}:${url}`;
   }
 
-  private async request<T>({ method, url, useCache = true }: RequestParams) {
+  private async request<T>({
+    method,
+    url,
+    useCache = true,
+  }: RequestParams): Promise<T | null> {
+    if (!this.isValidBaseUrl || !this.client) {
+      console.error("Invalid base URL. Cannot make request.");
+      return Promise.resolve(null); // Return null if the base URL is invalid
+    }
+
     const cacheKey = this.getCacheKey(method, url);
     const shouldUseCache = useCache && method === "GET";
 
@@ -44,7 +67,6 @@ export class ProductService extends CacheService {
         url,
       });
 
-      // if the request is successful, set the cache first
       if (shouldUseCache) {
         this.set(cacheKey, response.data);
       }
@@ -63,17 +85,21 @@ export class ProductService extends CacheService {
   }
 
   async getProducts() {
-    return this.request<ResponseData<FashionItem[]>>({
+    const result = await this.request<ResponseData<FashionItem[]>>({
       method: "GET",
       url: "/products",
     });
+
+    return result || { data: [] };
   }
 
   async getProductById(id: string) {
-    return this.request<ResponseData<FashionItem>>({
+    const result = await this.request<ResponseData<FashionItem>>({
       method: "GET",
       url: `/products/${id}`,
     });
+
+    return result || { data: null };
   }
 
   clearCacheFor(
@@ -86,5 +112,5 @@ export class ProductService extends CacheService {
   }
 }
 
-// singleton
+// Singleton
 export const productService = new ProductService();
