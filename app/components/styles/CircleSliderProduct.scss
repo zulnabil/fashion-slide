@@ -1,0 +1,38 @@
+$slider-height: 30rem;
+$half-slider-height: $slider-height / 2;
+
+.circle-slider-container {
+  width: $slider-height;
+  height: $slider-height;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.circle-slider {
+  border-radius: 50%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: all 0.5s;
+
+  &__image {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__item {
+    flex: 0 0 auto;
+    position: absolute;
+    left: 0;
+
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &--active {
+      transition: all 0.5s;
+    }
+  }
+}
